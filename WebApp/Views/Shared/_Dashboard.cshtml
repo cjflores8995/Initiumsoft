@@ -1,0 +1,76 @@
+﻿@model Models.Models.MainModel  
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        <title>InitiumSoft | @Model.PageTitle</title>
+
+        <meta name="description" content="InitiumSoft | @Model.PageTitle">
+        <meta name="author" content="Carlos Jhosef Flores Galvez">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="Dashmix - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="Dashmix">
+        <meta property="og:description" content="Dashmix - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+
+        <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
+        @Styles.Render("~/Content/assets/css/dashmix.min.css")
+
+        @if (Model.Role.Equals("AssignTicket"))
+        {
+            @Styles.Render("~/Content/assets/css/themes/xdream.min.css")
+        }
+
+    </head>
+    <body>
+        <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-fixed page-header-dark main-content-narrow">
+
+            @Html.Partial("~/Views/Shared/_Dashboard/_Menu.cshtml")
+
+            @Html.Partial("~/Views/Shared/_Dashboard/_Header.cshtml")
+
+            <main id="main-container">
+                @RenderBody()
+            </main>
+
+            @Html.Partial("~/Views/Shared/_Dashboard/_Footer.cshtml")
+        </div>
+
+        @Html.Partial("~/Views/Shared/_Dashboard/Templates/PeticionOk.cshtml")
+        @Html.Partial("~/Views/Shared/_Dashboard/Templates/PeticionError.cshtml")
+
+        @Scripts.Render("/Content/assets/js/dashmix.core.min.js")
+        @Scripts.Render("/Content/assets/js/dashmix.app.min.js")
+
+    <script>
+            jQuery(function () {
+                Dashmix.helpers('sidebar_style_toggle');
+
+                if ("@Model.Role" == "AssignTicket")
+                    Dashmix.layout('sidebar_style_toggle');
+            });
+
+
+    </script>
+
+        
+
+
+
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+        @Scripts.Render("~/Scripts/initium-script.1.0.0.js")
+
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>

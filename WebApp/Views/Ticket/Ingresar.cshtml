@@ -1,0 +1,79 @@
+﻿@model Models.Models.MainModel
+
+<div class="bg-image" style="background-image: url('/Content/assets/media/photos/photo21.jpg');">
+    <div class="bg-gd-white-op-rl">
+        <div class="content content-boxed text-center py-5">
+            <h1 class="h2 mb-2 text-primary"><span class="text-success"><i class="fa fa-plus"></i></span> Agregar Nuevo Ticket</h1>
+        </div>
+    </div>
+</div>
+
+<div class="content content-boxed">
+    @using (Ajax.BeginForm("AddNewTicket", "Logic", null, new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnBegin = "initiumSoft.OnBeginJs",
+        OnSuccess = "initiumSoft.OnSuccessJs",
+        OnFailure = "initiumSoft.OnFaiureJs",
+        OnComplete = "initiumSoft.OnCompleteJs"
+    }, new { @Class = "" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="block block-rounded bg-white">
+            <div class="block-content block-content-full">
+                <h2 class="content-heading text-primary"><i class="fa fa-info-circle text-success"></i> Información del ticket</h2>
+                <div class="row items-push">
+                    <div class="col-lg-4">
+                        <p class="text-muted">
+                            A continuación puedes agregar la información del ticket.
+                        </p>
+                    </div>
+                    <div class="col-lg-6 offset-lg-1">
+                        <div class="form-group">
+                            <label class="text-primary">
+                                <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Este es el identificador único del ticket con el cual se podra dar seguimiento al mismo. Este valor es generado automaticamente."></i>
+                                Identificador de ticket
+                            </label>
+                            <div class="form-control">@Model.Ticket.CodigoTicket</div>
+
+                            @Html.HiddenFor(m => m.Ticket.CodigoTicket, new { @Value = Model.Ticket.CodigoTicket })
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">
+                                <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Ingresa el nombre y apellido de la persona a la cual se le asignara el ticket."></i>
+                                Nombre del cliente
+                            </label>
+                            @Html.TextBoxFor(m => m.Ticket.Nombre, new { @class = "form-control", @Required = "required", @Autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.Ticket.Nombre, "", new { @Class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">
+                                <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Selecciona al usuario al cual se le asignara el ticket del cliente."></i>
+                                Usuario a asignar
+                            </label>
+                            @Html.DropDownListFor(m => m.Ticket.ApplicationUser.Id, ViewBag.ListadoUsuarios as SelectList, "Asignar a usuario", new { @Class = "form-control", @Required = "required" })
+                            @Html.ValidationMessageFor(m => m.Ticket.ApplicationUser.Id, "", new { @Class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">
+                                <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Selecciona la prioridad de atención del ticket. Cola 1 equivale a 2 minutos y cola 2 equivale a 3 minutos de atención."></i>
+                                Seleccionar prioridad
+                            </label>
+                            @Html.DropDownListFor(m => m.Ticket.Detalles, (List<SelectListItem>)ViewBag.Queue, "Selecciona la prioridad", new { @Class = "form-control", @Required = "required" })
+                            @Html.ValidationMessageFor(m => m.Ticket.Detalles, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-content block-content-full pt-0">
+                <div class="form-group row">
+                    <div class="col-lg-6 offset-lg-5">
+                        <button type="submit" class="btn btn-hero-primary btn-square btn-call-event">
+                            <i class="fa fa-plus mr-1"></i> Agregar Nuevo Ticket
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

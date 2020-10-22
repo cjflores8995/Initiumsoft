@@ -1,0 +1,86 @@
+﻿@using WebApp.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>InitiumSoft | Iniciar Sesión</title>
+
+    <meta name="description" content="InitiumSoft | Iniciar Sesión">
+    <meta name="author" content="Carlos Jhosef Flores Galvez">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
+    @Styles.Render("~/Content/assets/css/dashmix.min.css")
+
+</head>
+<body>
+    <div id="page-container">
+        <main id="main-container">
+            <div class="bg-image" style="background-image: url('/Content/assets/media/photos/photo19.jpg');">
+                <div class="row no-gutters justify-content-center bg-primary-dark-op">
+                    <div class="hero-static col-sm-8 col-md-6 col-xl-4 d-flex align-items-center p-2 px-sm-0">
+                        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+                            <div class="block-content block-content-full px-lg-5 px-xl-6 py-4 py-md-5 py-lg-6 bg-white">
+                                <div class="mb-2 text-center">
+                                    <a class="link-fx font-w700 font-size-h1" href="/">
+                                        <span class="text-dark">Initium</span><span class="text-primary">Soft</span>
+                                    </a>
+                                    <p class="text-uppercase font-w700 font-size-sm text-muted">Iniciar Sesión</p>
+                                </div>
+
+                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "js-validation-signin", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user-circle"></i>
+                                                </span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Correo electrónico", @Type="email", @Autofocus="autofocus" })
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-asterisk"></i>
+                                                </span>
+                                            </div>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Contraseña", @Type="password" })
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-hero-primary btn-square">
+                                            <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Ingresar
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @Scripts.Render("~/Content/assets/js/dashmix.app.min.js")
+    @Scripts.Render("~/Content/assets/js/plugins/jquery-sparkline/jquery.sparkline.min.js")
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿<nav id="sidebar" aria-label="Main Navigation">
+    <div class="bg-header-dark">
+        <div class="content-header bg-white-10">
+
+            <a class="link-fx font-w600 font-size-lg text-white" href="javascript:void(0)">
+                <span class="smini-visible">
+                    <span class="text-white-75">I</span><span class="text-white">S</span>
+                </span>
+                <span class="smini-hidden">
+                    <span class="text-white">Initium</span><span class="text-white-75">Soft</span>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="content-side content-side-full">
+        <ul class="nav-main">
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="@Url.Action("Index", "Ticket")">
+                    <i class="nav-main-link-icon fa fa-clipboard"></i>
+                    <span class="nav-main-link-name">Dashboard</span>
+                    <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
+                </a>
+            </li>
+            <li class="nav-main-item open">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon fa fa-ticket-alt"></i>
+                    <span class="nav-main-link-name">Tickets</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    @if (Model.Role.Equals("AssignTicket"))
+                    {
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="@Url.Action("Ingresar", "Ticket")">
+                                <i class="nav-main-link-icon fa fa-plus"></i>
+                                <span class="nav-main-link-name">Agregar</span>
+                            </a>
+                        </li>
+                    }
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="/Ticket/Asignados">
+                            <i class="nav-main-link-icon fa fa-check"></i>
+                            <span class="nav-main-link-name">Asignados</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="/Ticket/Atendidos">
+                            <i class="nav-main-link-icon fa fa-check-double"></i>
+                            <span class="nav-main-link-name">Atendidos</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

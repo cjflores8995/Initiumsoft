@@ -1,0 +1,120 @@
+﻿@model Models.Models.MainModel
+@{
+    ViewBag.Title = "Index";
+    double percentAsignados = Math.Round((((double)ViewBag.TicketsAsignados / (double)ViewBag.TicketsTotal) * 100), 2);
+    double percentAtendidos = Math.Round((((double)ViewBag.TicketsAtendidos / (double)ViewBag.TicketsTotal) * 100), 2);
+
+}
+
+<div class="content">
+    <div class="d-md-flex justify-content-md-between align-items-md-center py-3 pt-md-3 pb-md-0 text-center text-md-left">
+        <div>
+            <h1 class="h2 mb-1 text-primary">
+                <i class="fa fa-clipboard"></i> Dashboard
+            </h1>
+            <p class="mb-0">
+                Hola @Model.applicationUser.FirstName, te damos la bienvenida al <strong>Sistema De Tickets!</strong>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="row row-deck">
+        <div class="col-sm-6 col-xl-4">
+            <div class="block block-rounded text-center d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1">
+                    <div class="item rounded-lg bg-body-dark mx-auto my-3">
+                        <i class="fa fa-plus text-info"></i>
+                    </div>
+                    <div class="text-black font-size-h1 font-w700">@ViewBag.TicketsTotal</div>
+                    <div class="text-muted mb-3">Tickets Agregados</div>
+                    @if ((int)ViewBag.TicketsTotal != 0)
+                    {
+                        <div class="d-inline-block px-3 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-lighter">
+                            <i class="fa fa-caret-up mr-1"></i>
+                            100.00%
+                        </div>
+                    }
+
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500" href="@Url.Action("Ingresar")">
+                        Agregar ticket
+                        <i class="fa fa-arrow-right ml-1 opacity-25"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="block block-rounded text-center d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1">
+                    <div class="item rounded-lg bg-body-dark mx-auto my-3">
+                        <i class="fa fa-check text-primary"></i>
+                    </div>
+                    <div class="text-black font-size-h1 font-w700">@ViewBag.TicketsAsignados</div>
+                    <div class="text-muted mb-3">Tickets Asignados</div>
+                    @if ((int)ViewBag.TicketsAsignados != 0)
+                    {
+                        if (percentAsignados > 50)
+                        {
+                            <div class="d-inline-block px-3 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-lighter">
+                                <i class="fa fa-caret-up mr-1"></i>
+                                @percentAsignados%
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-inline-block px-3 py-1 rounded-lg font-size-sm font-w600 text-danger bg-danger-lighter">
+                                @percentAsignados%
+                                <i class="fa fa-caret-down mr-1"></i>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500" href="@Url.Action("Asignados", "Ticket")">
+                        Ver tickets asignados
+                        <i class="fa fa-arrow-right ml-1 opacity-25"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="block block-rounded text-center d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1">
+                    <div class="item rounded-lg bg-body-dark mx-auto my-3">
+                        <i class="fa fa-check-double text-success"></i>
+                    </div>
+                    <div class="text-black font-size-h1 font-w700">@ViewBag.TicketsAtendidos</div>
+                    <div class="text-muted mb-3">Tickets Atendidos</div>
+                    @if ((int)ViewBag.TicketsAtendidos != 0)
+                    {
+                        if (percentAtendidos > 50)
+                        {
+                            <div class="d-inline-block px-3 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-lighter">
+                                <i class="fa fa-caret-up mr-1"></i>
+                                @percentAtendidos%
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-inline-block px-3 py-1 rounded-lg font-size-sm font-w600 text-danger bg-danger-lighter">
+                                @percentAtendidos%
+                                <i class="fa fa-caret-down mr-1"></i>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500" href="@Url.Action("Atendidos", "Ticket")">
+                        Ver tickets atentidos
+                        <i class="fa fa-arrow-right ml-1 opacity-25"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

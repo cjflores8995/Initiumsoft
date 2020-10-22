@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>InitiumSoft</title>
+
+    <meta name="description" content="InitiumSoft - Aplicativo de tickets">
+    <meta name="author" content="Carlos Jhosef Flores Galvez">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
+    @Styles.Render("~/Content/assets/css/dashmix.min.css")
+
+
+</head>
+<body>
+    <div id="page-container" class="page-header-fixed page-header-glass main-content-boxed">
+        <main id="main-container">
+            <div class="bg-image" style="background-image: url('/Content/assets/media/photos/photo22.jpg');">
+                <div class="bg-black-75">
+                    <div class="content content-full">
+                        <div class="py-5 py-md-8 text-center">
+                            <h2 class="mb-3 text-primary-lighter link-fx">
+                                InitiumSoft
+                            </h2>
+                            <h3 class="font-w300 text-white-75 mb-4">
+                                Sistema de asignación de tickets.
+                            </h3>
+                            <span class="m-2 d-inline-block invisible" data-toggle="appear" data-class="animated fadeInUp">
+                                <a class="btn btn-hero-primary btn-square" href="@Url.Action("login", "account")">
+                                    <i class="fa fa-fw fa-user-circle mr-1"></i> Acceder
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("~/Views/Shared/_Dashboard/_Footer.cshtml")
+        </main>
+    </div>
+
+    @Scripts.Render("~/Content/assets/js/dashmix.core.min.js")
+
+    @Scripts.Render("~/Content/assets/js/dashmix.app.min.js")
+
+    @Scripts.Render("~/Content/assets/js/plugins/jquery-sparkline/jquery.sparkline.min.js")
+
+
+    <script>jQuery(function () { Dashmix.helpers(['sparkline']); });</script>
+</body>
+</html>
