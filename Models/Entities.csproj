@@ -59,6 +59,7 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\CommonFields.cs" />
     <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\Notificacion.cs" />
     <Compile Include="Models\StatusTicket.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

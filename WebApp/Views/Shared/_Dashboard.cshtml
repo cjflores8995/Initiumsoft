@@ -33,6 +33,7 @@
 
     </head>
     <body>
+        @Html.Hidden("getCountTicketsAsignados", Url.Action("GetCountTicketsAsignados", "Realtime"))
         <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-fixed page-header-dark main-content-narrow">
 
             @Html.Partial("~/Views/Shared/_Dashboard/_Menu.cshtml")
@@ -52,25 +53,23 @@
         @Scripts.Render("/Content/assets/js/dashmix.core.min.js")
         @Scripts.Render("/Content/assets/js/dashmix.app.min.js")
 
-    <script>
+        @Scripts.Render("~/Scripts/jquery.signalR-2.2.2.min.js")
+        <script src="~/signalr/hubs" type="text/javascript"></script>
+        @Scripts.Render("~/Scripts/initium-realtime-1.0.0.js")
+
+        <script>
             jQuery(function () {
                 Dashmix.helpers('sidebar_style_toggle');
 
                 if ("@Model.Role" == "AssignTicket")
                     Dashmix.layout('sidebar_style_toggle');
             });
-
-
-    </script>
-
-        
-
-
+        </script>
 
         @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
-
         @Scripts.Render("~/Scripts/initium-script.1.0.0.js")
 
         @RenderSection("Scripts", required: false)
+
     </body>
 </html>

@@ -51,7 +51,7 @@ namespace WebApp.Controllers
             mainModel.ApplicationUsers = new UserRepository().GetAllUsers(CustomEnums.TicketRoles.SolveTicket.ToString()).ToList();
 
             ViewBag.CustomUserFields = mainModel.ApplicationUsers
-                .Select(x => new { Id = x.Id, FirstName = string.Format($"{x.FirstName} {x.LastName}") })
+                .Select(x => new { Id = x.Id, FirstName = string.Format($"{x.FirstName} {x.LastName} - {x.Email}") })
                 .ToList();
 
             ViewBag.ListadoUsuarios = new SelectList(ViewBag.CustomUserFields, "Id", "FirstName");

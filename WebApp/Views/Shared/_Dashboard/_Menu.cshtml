@@ -10,6 +10,12 @@
                     <span class="text-white">Initium</span><span class="text-white-75">Soft</span>
                 </span>
             </a>
+            <div>
+                <a class="d-lg-none text-white ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+            </div>
+
         </div>
     </div>
     <div class="content-side content-side-full">
@@ -18,7 +24,6 @@
                 <a class="nav-main-link" href="@Url.Action("Index", "Ticket")">
                     <i class="nav-main-link-icon fa fa-clipboard"></i>
                     <span class="nav-main-link-name">Dashboard</span>
-                    <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
                 </a>
             </li>
             <li class="nav-main-item open">
@@ -41,6 +46,7 @@
                         <a class="nav-main-link" href="/Ticket/Asignados">
                             <i class="nav-main-link-icon fa fa-check"></i>
                             <span class="nav-main-link-name">Asignados</span>
+                            <span id="cout-ticket-asignados" class="nav-main-link-badge badge badge-pill"></span>
                         </a>
                     </li>
                     <li class="nav-main-item">

@@ -19,6 +19,7 @@ namespace Persistence
 
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<StatusTicket> StatusTickets { get; set; }
+        public DbSet<Notificacion> Notificaciones { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace Persistence
 
             modelBuilder.Entity<Ticket>().ToTable("Tickets");
             modelBuilder.Entity<StatusTicket>().ToTable("StatusTickets");
+            modelBuilder.Entity<Notificacion>().ToTable("Notificaciones");
 
         }
 

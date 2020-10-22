@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Repository
 {
-    public class UserRepository: Repository
+    public class UserRepository: Repository<ApplicationUser>
     {
         public string GetRoleUser(string userId)
         {

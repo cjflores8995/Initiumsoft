@@ -10,8 +10,8 @@ namespace Models.Models
     {
         public CommonFields()
         {
-            this.FechaRegistro = DateTime.UtcNow;
-            this.FechaModificacion = DateTime.UtcNow;
+            this.FechaRegistro = DateTime.UtcNow.AddHours(-5);
+            this.FechaModificacion = DateTime.UtcNow.AddHours(-5);
             this.Estado = true;
         }
 

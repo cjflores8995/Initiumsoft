@@ -1,9 +1,177 @@
 ﻿@model Models.Models.MainModel
+@{ 
+    int minuto = 2;
+    string dateNow = DateTime.Now.ToString("HH:mm:ss");
+
+    if(Model.Ticket.Queue == 2)
+    {
+        minuto = 3;
+    }
+}
 
 <div class="bg-image" style="background-image: url('/Content/assets/media/photos/photo23.jpg');">
     <div class="bg-gd-white-op-rl">
         <div class="content content-boxed text-center py-5">
-            <h1 class="h2 mb-2 text-primary"><span class="text-success"><i class="fa fa-check"></i></span> Atendiendo Ticket @Model.Ticket.CodigoTicket</h1>
+            <h1 class="h2 mb-2 text-primary"><span class="text-success"><i class="fa fa-ticket-alt"></i></span> Atendiendo Ticket @Model.Ticket.CodigoTicket</h1>
         </div>
     </div>
 </div>
+
+<div class="content content-boxed">
+    <div class="row row-deck">
+        <div class="col-md-6">
+            <a class="block block-rounded block-bordered block-link-shadow" href="javascript:void(0)">
+                <div class="block-content block-content-full text-center bg-body-light">
+                    <img class="img-avatar img-avatar-thumb" src="/Content/assets/media/avatars/avatar1.jpg" alt="">
+                    <div class="mt-2">
+                        <p class="font-w600 mb-0 text-primary">
+                            @Model.Ticket.Nombre
+                        </p>
+                    </div>
+                </div>
+                <div class="block-content block-content-full text-center">
+                    <div class="row gutters-tiny">
+                        <div class="col-6">
+                            <div class="item item-circle mx-auto">
+                                <p><strong>Prioridad</strong></p>
+                            </div>
+                            @if (Model.Ticket.Queue == 1)
+                            {
+                                <span data-toggle="tooltip" data-placement="top" title="Este ticket tiene una duración de 2 minutos." class="badge badge-primary text-uppercase font-w600">COLA 1</span>
+                            }
+                            else
+                            {
+                                <span data-toggle="tooltip" data-placement="top" title="Este ticket tiene una duración de 3 minutos." class="badge badge-success text-uppercase font-w600">COLA 2</span>
+                            }
+
+
+                        </div>
+                        <div class="col-6">
+                            <div class="item item-circle mx-auto">
+                                <p><strong>Registrado</strong></p>
+                            </div>
+                            <p class="text-muted mb-0">
+                                <strong>@Model.Ticket.FechaRegistro.ToString("HH:mm:ss dd-MM-yyyy")</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <div class="block block-rounded block-bordered block-link-shadow">
+                <div class="block-content">
+                    @using (Ajax.BeginForm("UpdateTicket", "Logic", null, new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        OnBegin = "initiumSoft.OnBeginJs",
+                        OnSuccess = "initiumSoft.OnSuccessJs",
+                        OnFailure = "initiumSoft.OnFaiureJs",
+                        OnComplete = "initiumSoft.OnCompleteJs",
+                        Confirm = "Se finalizara la atención del ticket. ¿Deseas continuar?",
+                    }, new { @Class = "" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Ticket.Id, new { @Valuer = Model.Ticket.Id})
+                        <table class="table table-borderless table-striped">
+                            <tbody>
+                                <tr class="text-primary">
+                                    <td style="width: 25%" class="text-right">
+                                        <strong>Hora Inicio:</strong>
+                                    </td>
+                                    <td>
+                                        @DateTime.UtcNow.AddHours(-5).ToString("HH:mm:ss tt")
+                                        @Html.HiddenFor(m => m.GenericString, new { @Value = dateNow })
+                                    </td>
+                                </tr>
+                                <tr class="text-primary">
+                                    <td id="container-cron" style="width: 25%" class="text-right">
+                                        <strong>Tiempo:</strong>
+                                    </td>
+                                    <td>
+                                        <div id="cronometro"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button id="btn-execute" class="btn btn-primary btn-square"><i class="fa fa-check"></i> Finalizar atención</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        window.onload = function () {
+            pantalla = document.getElementById("cronometro");
+
+            start();
+        }
+        var isMarch = false;
+        var acumularTime = 0;
+        function start() {
+            if (isMarch == false) {
+                timeInicial = new Date();
+                control = setInterval(cronometro, 10);
+                isMarch = true;
+            }
+        }
+        function cronometro() {
+            timeActual = new Date();
+            acumularTime = timeActual - timeInicial;
+            acumularTime2 = new Date();
+            acumularTime2.setTime(acumularTime);
+            cc = Math.round(acumularTime2.getMilliseconds() / 10);
+            ss = acumularTime2.getSeconds();
+            mm = acumularTime2.getMinutes();
+            hh = acumularTime2.getHours() - 18;
+            if (cc < 10) { cc = "0" + cc; }
+            if (ss < 10) { ss = "0" + ss; }
+            if (mm < 10) { mm = "0" + mm; }
+            if (hh < 10) { hh = "0" + hh; }
+            pantalla.innerHTML = "00 : " + mm + " : " + ss + " : " + cc;
+
+            if (mm >= @minuto) {
+                $('#btn-execute').removeClass('btn-primary').addClass('btn-danger');
+                $('#container-cron').removeClass('text-primary').addClass('text-danger');
+                $('#cronometro').addClass('text-danger');
+                
+
+            }
+        }
+
+        function stop() {
+            if (isMarch == true) {
+                clearInterval(control);
+                isMarch = false;
+            }
+        }
+
+        function resume() {
+            if (isMarch == false) {
+                timeActu2 = new Date();
+                timeActu2 = timeActu2.getTime();
+                acumularResume = timeActu2 - acumularTime;
+
+                timeInicial.setTime(acumularResume);
+                control = setInterval(cronometro, 10);
+                isMarch = true;
+            }
+        }
+
+        function reset() {
+            if (isMarch == true) {
+                clearInterval(control);
+                isMarch = false;
+            }
+            acumularTime = 0;
+            pantalla.innerHTML = "00 : 00 : 00 : 00";
+        }
+    </script>
+    }

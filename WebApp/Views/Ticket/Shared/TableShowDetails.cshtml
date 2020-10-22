@@ -17,10 +17,14 @@
                         {
                             <th style="width: 15%;">Usuario</th>
                         }
-                        <th style="width: 15%;">Registrado</th>
+                        <th style="width: 15%;">Fechas</th>
                         @if (!Model.Role.Equals(BusinessLogic.Common.CustomEnums.TicketRoles.AssignTicket.ToString()))
                         {
-                            <th style="width: 15%;">Acciones</th>
+                            <th style="width: 15%;">Detalles</th>
+                        }
+                        else
+                        {
+                            <th style="width: 15%;">Detalles</th>
                         }
 
                     </tr>
@@ -41,11 +45,11 @@
                         <td>
                             @if (ticket.Queue == 1)
                             {
-                                <span class="badge badge-primary">Cola 1</span>
+                                <span data-toggle="tooltip" data-placement="top" title="Este ticket tiene una duración de 2 minutos." class="badge badge-primary">Cola 1</span>
                             }
                             else
                             {
-                                <span class="badge badge-success">Cola 2</span>
+                                <span data-toggle="tooltip" data-placement="top" title="Este ticket tiene una duración de 3 minutos." class="badge badge-success">Cola 2</span>
                             }
                         </td>
                         @if (Model.Role.Equals(BusinessLogic.Common.CustomEnums.TicketRoles.AssignTicket.ToString()))
@@ -61,15 +65,32 @@
 
                         <td>
                             <small>
-                                @ticket.FechaRegistro.ToString("dd-MM-yy HH:mm:ss")
+                                <span data-toggle="tooltip" data-placement="top" title="Registrado: @ticket.FechaRegistro.ToString("dd-MM-yy HH:mm:ss")">R: @ticket.FechaRegistro.ToString("dd-MM-yy HH:mm:ss")</span>
+                                <br />
+                                <span data-toggle="tooltip" data-placement="top" title="Actualizado: @ticket.FechaRegistro.ToString("dd-MM-yy HH:mm:ss")">A: @ticket.FechaModificacion.ToString("dd-MM-yy HH:mm:ss")</span>
                             </small>
                         </td>
                         @if (!Model.Role.Equals(BusinessLogic.Common.CustomEnums.TicketRoles.AssignTicket.ToString()))
                         {
-                            <td class="text-right">
-                                <a href="@Url.Action("Asignados", "Ticket", new { Id = ticket.CodigoTicket})" class="btn btn-outline-primary btn-square btn-sm">
-                                    <i class="fa fa-arrow-right"></i> Atender
-                                </a>
+                            if (ticket.StatusTicket.Siglas.Equals(Models.Models.StatusTicket.EnumEstatusTicket.asignado.ToString()))
+                            {
+                                <td class="text-right">
+                                    <a href="@Url.Action("Asignados", "Ticket", new { Id = ticket.CodigoTicket})" class="btn btn-primary btn-square btn-sm">
+                                        <i class="fa fa-arrow-right"></i> Atender
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td width="15%">
+                                    <code>@ticket.Detalles.ToString()</code>
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            <td width="15%">
+                                <code>@ticket.Detalles.ToString()</code>
                             </td>
                         }
 

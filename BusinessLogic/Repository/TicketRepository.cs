@@ -12,7 +12,7 @@ using Utilities;
 
 namespace BusinessLogic.Repository
 {
-    public class TicketRepository : Repository
+    public class TicketRepository : Repository<Ticket>
     {
         //agregar ticket
         public RequestResponse AgregarTicket(Ticket ticket)
@@ -24,6 +24,33 @@ namespace BusinessLogic.Repository
                 try
                 {
                     db.Entry(ticket).State = EntityState.Added;
+                    db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    resp = new RequestResponse(ex.Message);
+                }
+                return resp;
+            }
+        }
+
+        //actualizar ticket
+        public RequestResponse ActualizarTicket(Ticket ticket)
+        {
+            RequestResponse resp = new RequestResponse();
+
+            using (DbContextTransaction transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Ticket currentTicket = db.Tickets.FirstOrDefault(t => t.Id == ticket.Id);
+
+                    currentTicket = MapOut(currentTicket, ticket);
+
+                    db.Entry(currentTicket).State = EntityState.Modified;
                     db.SaveChanges();
 
                     transaction.Commit();
@@ -127,6 +154,12 @@ namespace BusinessLogic.Repository
         public Ticket ObtenerTicketPorCodigo(string userId, string codigoTicket)
         {
             return db.Tickets.FirstOrDefault(t => t.UserId.Equals(userId) && t.CodigoTicket.Equals(codigoTicket));
+        }
+
+        //devuelve un ticket por el codigo
+        public Ticket ObtenerTicketPorId(int ticketId)
+        {
+            return db.Tickets.FirstOrDefault(t => t.Id == ticketId);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Models.Models
 
         //relacion entre usuario y tickets
         public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<Notificacion> Notificaciones { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

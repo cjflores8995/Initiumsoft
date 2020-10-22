@@ -15,6 +15,7 @@ namespace Models.Models
 
         public string GenericString { get; set; }
         public int GenericInteger { get; set; }
+        public DateTime GenericDateTime { get; set; }
 
         public string PageTitle { get; set; }
         public string Role { get; set; }

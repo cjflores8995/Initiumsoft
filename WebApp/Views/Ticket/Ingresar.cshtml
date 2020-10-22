@@ -31,15 +31,6 @@
                     <div class="col-lg-6 offset-lg-1">
                         <div class="form-group">
                             <label class="text-primary">
-                                <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Este es el identificador único del ticket con el cual se podra dar seguimiento al mismo. Este valor es generado automaticamente."></i>
-                                Identificador de ticket
-                            </label>
-                            <div class="form-control">@Model.Ticket.CodigoTicket</div>
-
-                            @Html.HiddenFor(m => m.Ticket.CodigoTicket, new { @Value = Model.Ticket.CodigoTicket })
-                        </div>
-                        <div class="form-group">
-                            <label class="text-primary">
                                 <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Ingresa el nombre y apellido de la persona a la cual se le asignara el ticket."></i>
                                 Nombre del cliente
                             </label>
@@ -54,6 +45,7 @@
                             @Html.DropDownListFor(m => m.Ticket.ApplicationUser.Id, ViewBag.ListadoUsuarios as SelectList, "Asignar a usuario", new { @Class = "form-control", @Required = "required" })
                             @Html.ValidationMessageFor(m => m.Ticket.ApplicationUser.Id, "", new { @Class = "text-danger" })
                         </div>
+
                         <div class="form-group">
                             <label class="text-primary">
                                 <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Selecciona la prioridad de atención del ticket. Cola 1 equivale a 2 minutos y cola 2 equivale a 3 minutos de atención."></i>
@@ -61,6 +53,15 @@
                             </label>
                             @Html.DropDownListFor(m => m.Ticket.Detalles, (List<SelectListItem>)ViewBag.Queue, "Selecciona la prioridad", new { @Class = "form-control", @Required = "required" })
                             @Html.ValidationMessageFor(m => m.Ticket.Detalles, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">
+                                <i class="fa fa-question-circle text-success" data-toggle="tooltip" data-placement="top" title="Este es el identificador único del ticket con el cual se podra dar seguimiento al mismo. Este valor es generado automaticamente."></i>
+                                Identificador de ticket
+                            </label>
+                            <div class="form-control">@Model.Ticket.CodigoTicket</div>
+
+                            @Html.HiddenFor(m => m.Ticket.CodigoTicket, new { @Value = Model.Ticket.CodigoTicket })
                         </div>
                     </div>
                 </div>
