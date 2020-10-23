@@ -11,29 +11,29 @@ namespace WebApp.Controllers
 {
     public class RealtimeController : Controller
     {
-        // GET: Realtime
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //// GET: Realtime
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult GetCountTicketsAsignados()
-        {
-            RequestResponse resp = new RequestResponse();
-            int count = 0;
+        //public ActionResult GetCountTicketsAsignados()
+        //{
+        //    RequestResponse resp = new RequestResponse();
+        //    int count = 0;
 
-            try
-            {
-                count = new NotificacionRepository().CountNotificationsByUserId(User.Identity.GetUserId());
-                resp.Details = count.ToString();
-            }
-            catch(Exception ex)
-            {
-                resp = new RequestResponse(ex.Message);
-                resp.Details = count.ToString();
-            }
+        //    try
+        //    {
+        //        count = new NotificacionRepository().CountNotificationsByUserId(User.Identity.GetUserId());
+        //        resp.Details = count.ToString();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        resp = new RequestResponse(ex.Message);
+        //        resp.Details = count.ToString();
+        //    }
 
-            return Json(resp, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(resp, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

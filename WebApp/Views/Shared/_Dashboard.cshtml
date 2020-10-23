@@ -49,11 +49,12 @@
 
         @Html.Partial("~/Views/Shared/_Dashboard/Templates/PeticionOk.cshtml")
         @Html.Partial("~/Views/Shared/_Dashboard/Templates/PeticionError.cshtml")
+        @Html.Partial("~/Views/Shared/_Dashboard/Templates/NuevoTicket.cshtml")
 
         @Scripts.Render("/Content/assets/js/dashmix.core.min.js")
         @Scripts.Render("/Content/assets/js/dashmix.app.min.js")
 
-        @Scripts.Render("~/Scripts/jquery.signalR-2.2.2.min.js")
+        @Scripts.Render("~/Scripts/jquery.signalR-2.4.1.min.js")
         <script src="~/signalr/hubs" type="text/javascript"></script>
         @Scripts.Render("~/Scripts/initium-realtime-1.0.0.js")
 

@@ -50,21 +50,21 @@ namespace Persistence.Seeders
             }
 
             //segundo usuario que atiende
-            var tmpSolveTicketUser2 = context.Users.FirstOrDefault(x => x.Email.Equals("ticket2@initiumsoft.com"));
+            //var tmpSolveTicketUser2 = context.Users.FirstOrDefault(x => x.Email.Equals("ticket2@initiumsoft.com"));
 
-            if (tmpSolveTicketUser == null)
-            {
-                var solveTicketsUser = new ApplicationUser()
-                {
-                    FirstName = "Patricia",
-                    LastName = "Galvez",
-                    Email = "ticket2@initiumsoft.com",
-                    UserName = "ticket2@initiumsoft.com",
-                    EmailConfirmed = true
-                };
-                userManager.Create(solveTicketsUser, "1234abcd");
-                userManager.AddToRole(solveTicketsUser.Id, "SolveTicket");
-            }
+            //if (tmpSolveTicketUser == null)
+            //{
+            //    var solveTicketsUser = new ApplicationUser()
+            //    {
+            //        FirstName = "Patricia",
+            //        LastName = "Galvez",
+            //        Email = "ticket2@initiumsoft.com",
+            //        UserName = "ticket2@initiumsoft.com",
+            //        EmailConfirmed = true
+            //    };
+            //    userManager.Create(solveTicketsUser, "1234abcd");
+            //    userManager.AddToRole(solveTicketsUser.Id, "SolveTicket");
+            //}
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿@model Models.Models.MainModel
 
-<div class="bg-image" style="background-image: url('/Content/assets/media/photos/photo23.jpg');">
+<div class="bg-image" style="background-image: url('/Content/assets/media/photos/photo23.jpg');" onload="">
     <div class="bg-gd-white-op-rl">
         <div class="content content-boxed text-center py-5">
             <h1 class="h2 mb-2 text-primary"><span class="text-success"><i class="fa fa-check"></i></span> Tickets Asignados</h1>
@@ -19,4 +19,5 @@
     @Scripts.Render("~/Content/assets/js/plugins/datatables/buttons/buttons.html5.min.js")
 
     @Scripts.Render("~/Content/assets/js/plugins/datatables/be_tables_datatables.min.js")
+
 }

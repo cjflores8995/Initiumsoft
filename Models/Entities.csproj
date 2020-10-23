@@ -62,6 +62,7 @@
     <Compile Include="Models\Notificacion.cs" />
     <Compile Include="Models\StatusTicket.cs" />
     <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\UserHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

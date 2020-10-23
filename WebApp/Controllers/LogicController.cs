@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Repository;
+using Microsoft.AspNet.Identity;
 using Models.Models;
 using Newtonsoft.Json;
 using System;
@@ -51,7 +52,8 @@ namespace WebApp.Controllers
                     var notyResp = new NotificacionRepository().AgregarNotificacionAsync(notificacion);
 
                     //dispara la notificacion
-                    RealtimeHub.Show();
+                    //RealtimeHub.Show();
+                    new RealtimeHub().SendNotification(model.Ticket.ApplicationUser.Id);
                 }
 
             } 
@@ -85,6 +87,25 @@ namespace WebApp.Controllers
                     resp.Details = Url.Action("Asignados", "Ticket");
                 }
 
+            }
+            catch (Exception ex)
+            {
+                resp = new RequestResponse(ex.Message);
+            }
+
+            return Json(resp);
+        }
+
+        public ActionResult UpdateStatusNotif()
+        {
+            RequestResponse resp = new RequestResponse();
+
+            try
+            {
+                //Code
+                string userId = User.Identity.GetUserId();
+
+                var updateNotif = new NotificacionRepository().UpdateNotificationState(userId);
             }
             catch (Exception ex)
             {

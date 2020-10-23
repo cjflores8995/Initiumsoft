@@ -14,7 +14,37 @@ namespace BusinessLogic.Repository
 {
     public class NotificacionRepository : Repository<Notificacion>
     {
-        //agregar ticket
+
+        public async Task<RequestResponse> UpdateNotificationState(string userId)
+        {
+            RequestResponse resp = new RequestResponse();
+
+            using (DbContextTransaction transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+
+                    var notifications = db.Notificaciones.Where(
+                      n => n.UserId == userId
+                      && n.Visto == false
+                      ).ToList();
+
+                    if (notifications.Any())
+                    {
+                        notifications.ForEach(n => n.Visto = true);
+                        await (db.SaveChangesAsync());
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    resp = new RequestResponse(ex.Message);
+                }
+                return resp;
+            }
+        }
+
         public async Task<RequestResponse> AgregarNotificacionAsync(Notificacion notificacion)
         {
             RequestResponse resp = new RequestResponse();
