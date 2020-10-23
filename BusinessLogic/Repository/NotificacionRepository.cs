@@ -15,7 +15,7 @@ namespace BusinessLogic.Repository
     public class NotificacionRepository : Repository<Notificacion>
     {
 
-        public async Task<RequestResponse> UpdateNotificationState(string userId)
+        public RequestResponse UpdateNotificationState(string userId)
         {
             RequestResponse resp = new RequestResponse();
 
@@ -32,7 +32,7 @@ namespace BusinessLogic.Repository
                     if (notifications.Any())
                     {
                         notifications.ForEach(n => n.Visto = true);
-                        await (db.SaveChangesAsync());
+                        db.SaveChanges();
                         transaction.Commit();
                     }
                 }
