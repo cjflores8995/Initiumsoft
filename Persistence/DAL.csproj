@@ -69,6 +69,9 @@
     <Compile Include="Seeders\UserSeeder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\WebApp\ConnectionString.config">
+      <Link>ConnectionString.config</Link>
+    </Content>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

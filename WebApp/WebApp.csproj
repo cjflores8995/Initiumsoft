@@ -254,6 +254,7 @@
     <Content Include="Content\assets\fonts\simple-line-icons\Simple-Line-Icons.woff2" />
     <Content Include="Scripts\initium-realtime-1.0.0.js" />
     <Content Include="Scripts\initium-script.1.0.0.js" />
+    <Content Include="ConnectionString.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -296,7 +297,6 @@
     <Content Include="Views\Shared\_Dashboard\Templates\PeticionError.cshtml" />
     <Content Include="Views\Ticket\Shared\TableShowDetails.cshtml" />
     <Content Include="Views\Ticket\Asignados_Detail.cshtml" />
-    <Content Include="Views\Shared\_Dashboard\Templates\NuevoTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

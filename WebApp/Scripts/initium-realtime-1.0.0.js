@@ -2,60 +2,37 @@
     var hub = $.connection.realtimeHub;
 
     hub.client.broadcastNotif = function (total) {
-        GetCountAssignTickets(total, false);
+        GetCountAssignTickets(total);
 
 
     };
 
     hub.client.broadcastNotif2 = function (total) {
-        GetCountAssignTickets(total, true);
+        GetCountAssignTickets(total);
     };
 
     $.connection.hub.start()
         .done(function () {
-            console.log('Hub conectado!');
-
             hub.server.getNotification();
         })
         .fail(function () {
             console.error('No se pudo conectar!');
         });
 
-    //$.connection.hub.start();
-
-    //GetCountAssignTickets(total);
 });
 
-function GetCountAssignTickets(total, moreActions) {
+function GetCountAssignTickets(total) {
     let coutTicketsAsignados = $('#cout-ticket-asignados');
 
-    if (total > 0) {
-
-        if (moreActions) {
-            let titulo = document.title;
-            let estado = true;
-
-            setInterval(function () {
-
-                if (!estado) {
-                    document.title = titulo;
-                } else {
-                    document.title = "Nueva notificación recibida";
-                }
-                estado = !estado;
-
-            }, 1000);
+    if (coutTicketsAsignados.length > 0) {
+        if (total > 0) {
+            coutTicketsAsignados.addClass('badge-danger');
+            coutTicketsAsignados.text(total);
         }
-
-        coutTicketsAsignados.addClass('badge-danger');
-        coutTicketsAsignados.text(total);
-
-        $('#new-ticket').text('Un nuevo ticket ha sido asignado para tu atención.');
-        jQuery('#ticket-alert-message').toast('show');
-    }
-    else {
-        coutTicketsAsignados.removeClass('badge-danger');
-        coutTicketsAsignados.text('');
+        else {
+            coutTicketsAsignados.removeClass('badge-danger');
+            coutTicketsAsignados.text('');
+        }
     }
 }
 
