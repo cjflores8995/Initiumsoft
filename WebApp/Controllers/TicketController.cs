@@ -15,6 +15,8 @@ namespace WebApp.Controllers
     [Authorize]
     public class TicketController : Controller
     {
+        IHelpers helpers;
+
         MainModel mainModel = new MainModel();
 
         public TicketController()
@@ -26,6 +28,11 @@ namespace WebApp.Controllers
                 mainModel.applicationUser = context.Users.Find(userId);
                 mainModel.Role = new UserRepository().GetRoleUser(userId);
             }
+        }
+
+        public TicketController(IHelpers _helpers)
+        {
+            this.helpers = _helpers;
         }
 
         public ActionResult Index()
@@ -46,7 +53,11 @@ namespace WebApp.Controllers
 
             mainModel.Ticket = new Ticket
             {
-                CodigoTicket = Helpers.GenerateIdentifier()
+                //genera el codigo basado en el tick de fechas
+                //CodigoTicket = new TicketController(new Helpers()).helpers.GenerateIdentifier()
+
+                //genera el codigo basado en un valor alfanumérico único
+                CodigoTicket = new TicketController(new Identifiers()).helpers.GenerateIdentifier()
             };
             mainModel.ApplicationUsers = new UserRepository().GetAllUsers(CustomEnums.TicketRoles.SolveTicket.ToString()).ToList();
 

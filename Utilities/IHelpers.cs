@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Utilities
 {
-    public class Helpers: IHelpers
+    public interface IHelpers
     {
-        public string GenerateIdentifier()
-        {
-            return DateTime.Now.Ticks.ToString();
-        }
+        string GenerateIdentifier();
     }
 }
